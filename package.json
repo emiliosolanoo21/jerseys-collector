@@ -1,0 +1,27 @@
+{
+  "name": "vestuario",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview --host",
+    "typecheck": "vue-tsc -b"
+  },
+  "dependencies": {
+    "@fontsource/archivo-black": "^5.3.0",
+    "@supabase/supabase-js": "^2.118.0",
+    "lucide-vue-next": "^1.0.0",
+    "pinia": "^4.1.0",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "typescript": "~5.9",
+    "vite": "^8.3.5",
+    "vue-tsc": "^3.3.13"
+  }
+}

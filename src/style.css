@@ -1,0 +1,258 @@
+:root {
+  /*
+   * Vestuario: neutros cálidos con negro y dorado solo donde importan
+   * (logo, acción principal, selección y favoritos).
+   * El dorado puro no se lee sobre blanco: en claro --accent es un dorado oscuro
+   * y los botones principales son negros con letra dorada.
+   */
+  color-scheme: light;
+  --bg: #f5f3ee;
+  --surface: #fffefb;
+  --surface-2: #ece8df;
+  --border: #ddd7ca;
+  --text: #171511;
+  --text-2: #57514a;
+  --text-3: #6d665c;
+  --accent: #82610c;
+  --accent-soft: #f4ead0;
+  --primary-bg: #15130f;
+  --primary-ink: #f0cf7a;
+  --good: #166f32;
+  --good-soft: #e1f3e6;
+  --bad: #a3123a;
+  --bad-soft: #fbe4ea;
+  --star: #b8860b;
+  /* Espacio extra bajo la barra inferior (en el celular) para que nada flotante la tape */
+  --nav-lift: 0px;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.45;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0e0d0b;
+    --surface: #181612;
+    --surface-2: #25221c;
+    --border: #37322a;
+    --text: #f4f0e6;
+    --text-2: #c9c2b3;
+    --text-3: #9c9484;
+    --accent: #e2bc5c;
+    --accent-soft: #33290f;
+    --primary-bg: #e2bc5c;
+    --primary-ink: #15120a;
+    --good: #4cc26e;
+    --good-soft: #17301f;
+    --bad: #ff6b8a;
+    --bad-soft: #3d1822;
+    --star: #f0c64f;
+    --shadow: none;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* Radios, casillas y barras nativas con el color de la marca */
+:root { accent-color: var(--accent); }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  overscroll-behavior-y: none;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.1rem; }
+h3 { font-size: 1rem; }
+p { margin: 0; }
+
+a { color: var(--accent); }
+
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding:
+    calc(28px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(156px + var(--nav-lift) + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.muted { color: var(--text-2); }
+.small { font-size: 0.85rem; }
+.tiny { font-size: 0.75rem; color: var(--text-3); }
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.stack { display: flex; flex-direction: column; gap: 8px; }
+.grow { flex: 1; min-width: 0; }
+
+button, .btn {
+  font: inherit;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-height: 44px;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: background-color 0.12s, transform 0.08s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+button:active:not(:disabled), .btn:active { transform: scale(0.97); }
+button:disabled { opacity: 0.5; cursor: default; }
+@media (hover: hover) {
+  button:hover:not(:disabled):not(.primary), .btn:hover:not(.primary) { background: var(--border); }
+  button.primary:hover:not(:disabled), .btn.primary:hover { filter: brightness(1.08); }
+}
+button.primary, .btn.primary { background: var(--primary-bg); border-color: var(--primary-bg); color: var(--primary-ink); font-weight: 600; }
+button.danger { color: var(--bad); }
+button.ghost { background: transparent; border-color: transparent; }
+button.small, .btn.small { padding: 6px 12px; min-height: 40px; font-size: 0.85rem; }
+button.block { width: 100%; }
+
+input, select, textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 44px;
+  width: 100%;
+  /* 16px evita que iOS haga zoom al enfocar un campo */
+  font-size: max(16px, 1rem);
+}
+input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+label.field, div.field { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; color: var(--text-2); min-width: 0; }
+
+/*
+ * Fechas: Safari de iPhone da a <input type="date"> un ancho mínimo propio,
+ * centra el texto e ignora width:100%, así que se sale de su caja. Lo normalizamos.
+ */
+input[type='date'] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.3;
+  text-align: left;
+}
+input[type='date']::-webkit-date-and-time-value { text-align: left; margin: 0; }
+input[type='date']::-webkit-calendar-picker-indicator { opacity: 0.7; }
+
+/* Dos campos lado a lado que se apilan en pantallas muy angostas */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 340px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.chip.accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+.empty { text-align: center; color: var(--text-2); padding: 16px 0; }
+
+.error-banner {
+  background: var(--bad-soft);
+  color: var(--bad);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+/* Sin flechitas en campos numéricos (en el celular estorban) */
+input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Celular: sube la barra inferior sobre insignias flotantes (p. ej. la de Netlify) */
+@media (max-width: 899px) {
+  :root { --nav-lift: 22px; }
+}
+
+/* Logotipo: nombre de la marca en Archivo Black (empaquetada, funciona sin conexión) */
+.wordmark { font-family: 'Archivo Black', system-ui, sans-serif; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+
+/* Interruptor (switch) accesible: un checkbox con aspecto de palanca */
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; min-height: 44px; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; min-height: 0; padding: 0; }
+.switch .track { position: relative; flex: none; width: 46px; height: 28px; border-radius: 14px; background: var(--border); transition: background-color 0.15s; }
+.switch .thumb { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 0.25); transition: transform 0.15s; }
+.switch input:checked + .track { background: var(--accent); }
+.switch input:checked + .track .thumb { transform: translateX(18px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Iconos de Lucide alineados con el texto */
+.lucide { flex: none; }
+
+/* Computadora: deja espacio para el riel lateral y usa más ancho para la cuadrícula */
+@media (min-width: 900px) {
+  .page { max-width: 960px; padding: 32px 32px 104px; margin-left: max(128px, calc((100vw - 960px) / 2)); }
+}
+
+/* Celular en horizontal: el riel lateral ocupa la izquierda; sin barra abajo */
+@media (orientation: landscape) and (max-height: 540px) {
+  :root { --nav-lift: 0px; }
+  .page {
+    max-width: none;
+    margin: 0;
+    padding:
+      calc(16px + env(safe-area-inset-top))
+      calc(16px + env(safe-area-inset-right))
+      calc(88px + env(safe-area-inset-bottom))
+      calc(88px + env(safe-area-inset-left));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation-duration: 0.01ms !important; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

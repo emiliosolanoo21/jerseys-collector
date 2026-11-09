@@ -1,0 +1,14 @@
+# Configuración de Netlify: cómo construir y servir la app
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 necesita Node 20.19+ o 22.12+
+  NODE_VERSION = "22"
+
+# SPA: cualquier ruta (/favoritos, /deseos…) sirve index.html y Vue Router decide
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,21 @@
+<script setup lang="ts">
+/**
+ * Logo de Vestuario: camisola dorada sobre negro con un balón en el pecho.
+ * El negro y el dorado son fijos: el logo se ve igual en tema claro y oscuro.
+ */
+defineProps<{ size?: number }>()
+</script>
+
+<template>
+  <svg class="brand-mark" viewBox="0 0 64 64" :width="size ?? 32" :height="size ?? 32" aria-hidden="true">
+    <rect width="64" height="64" rx="14" fill="#0e0d0b" />
+    <path fill="#e2bc5c" d="M22 9 10 14 3 28l9 5 4-5v26a3 3 0 0 0 3 3h26a3 3 0 0 0 3-3V28l4 5 9-5-7-14-12-5c-2 5-6 8-10 8s-8-3-10-8z" />
+    <circle cx="32" cy="38" r="12" fill="#0e0d0b" />
+    <path fill="#e2bc5c" d="M32.00 32.80L36.95 36.39L35.06 42.21L28.94 42.21L27.05 36.39zM32.00 29.40L26.68 26.58L37.32 26.58zM40.18 35.34L41.22 29.41L44.51 39.54zM37.05 44.96L43.02 44.11L34.40 50.37zM26.95 44.96L29.60 50.37L20.98 44.11zM23.82 35.34L19.49 39.54L22.78 29.41z" />
+    <path fill="none" stroke="#e2bc5c" stroke-width="1.8" stroke-linecap="round" d="M32.00 32.80L32.00 29.20M36.95 36.39L40.37 35.28M35.06 42.21L37.17 45.12M28.94 42.21L26.83 45.12M27.05 36.39L23.63 35.28" />
+  </svg>
+</template>
+
+<style scoped>
+.brand-mark { flex: none; }
+</style>
